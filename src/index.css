@@ -2,6 +2,7 @@
 
 @theme {
   --color-*: initial;
+  --color-white: #ffffff;
   --color-yellow-light: #dbc170;
   --color-yellow-base: #b8952e;
   --color-yellow-dark: #846f2e;

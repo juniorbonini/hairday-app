@@ -16,7 +16,7 @@ export const buttonSelectVariants = cva(
         sm: "h-10 w-19.5",
       },
       disabled: {
-        true: "opacity-50 pointer-events-none",
+        true: "opacity-30 pointer-events-none",
       },
     },
     defaultVariants: {

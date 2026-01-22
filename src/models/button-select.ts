@@ -32,5 +32,5 @@ export interface ButtonSelectInterface
   extends
     Omit<React.ComponentProps<"button">, "size" | "disabled">,
     VariantProps<typeof buttonSelectVariants> {
-        selected: boolean
+        selected: boolean;
     }

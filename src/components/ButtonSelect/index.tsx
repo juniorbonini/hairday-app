@@ -1,7 +1,7 @@
 import {
   buttonSelectVariants,
   type ButtonSelectInterface,
-} from "../../models/button-select";
+} from "@/models/button-select";
 
 export function ButtonSelect({
   variant,

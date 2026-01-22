@@ -4,6 +4,7 @@ export const iconVariants = cva("", {
   variants: {
     variant: {
       primary: "fill-yellow-base hover:fill-yellow-dark transition",
+      secundary: "fill-gray-400"
     },
   },
   defaultVariants: {

@@ -1,4 +1,4 @@
-import { iconVariants, type IconInteface } from "../../models/button-icon";
+import { iconVariants, type IconInteface } from "@/models/button-icon";
 
 export function Icon({
   variant,

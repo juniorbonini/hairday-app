@@ -1,5 +1,5 @@
 import React from "react";
-import { asideVariants, type AsideInterface } from "../../models/aside";
+import { asideVariants, type AsideInterface } from "@/models/aside";
 
 export function Aside({
   as = "aside",

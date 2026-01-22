@@ -1,5 +1,5 @@
 import React from "react";
-import { textVariants, type TextInterface } from "../../models/text";
+import { textVariants, type TextInterface } from "@/models/text";
 
 export function Text({
   variant,

@@ -1,14 +1,15 @@
-import { Button } from "./components/Button";
-import { Text } from "./components/Text";
+import { Button } from "@/components/Button";
+import { Text } from "@/components/Text";
 
 // @ts-expect-error: module declaration for SVG React import
-import TrashIcon from "./assets/icons/trash.svg?react";
-import { Icon } from "./components/ButtonIcon";
-import { ButtonSelect } from "./components/ButtonSelect";
+import TrashIcon from "@/assets/icons/trash.svg?react";
+import { Icon } from "@/components/ButtonIcon";
+import { ButtonSelect } from "@/components/ButtonSelect";
 import React from "react";
-import { Header } from "./components/core-components/Header";
-import Title from "./components/Title";
-import { Aside } from "./components/Aside";
+import Title from "@/components/Title";
+import { Aside } from "@/components/Aside";
+import { LabelField } from "@/components/LabelField";
+import { Header } from "@/core-components/Header";
 
 function App() {
   const [selectedHour, setSelectedHour] = React.useState<string | null>(null);
@@ -23,11 +24,7 @@ function App() {
       <Aside>
         <Title />
         <div className="items-center justify-center text-yellow-light">
-          <Text variant="cataraman-sm">Olá Mundo</Text>
-          <Text variant="cataraman-md">Olá Mundo</Text>
-          <Text variant="cataraman-title-sm">Olá Mundo</Text>
-          <Text variant="cataraman-title-md">Olá Mundo</Text>
-          <Text variant="cataraman-title-lg">Olá Mundo</Text>
+         <LabelField />
         </div>
         <div>
           <Button>

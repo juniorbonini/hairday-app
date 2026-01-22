@@ -43,9 +43,10 @@ export function Form() {
           onChange={(event) => setDate(event.target.value)}
         />
       </InputField>
-      <div className="space-y-3">
+      <div className="space-y-6">
+        <Text variant='cataraman-title-md'>Horários</Text>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-md">Manhã</Text>
+          <Text variant="cataraman-title-sm" className=" mb-6">Manhã</Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.morning.map((hour) => (
               <ButtonSelect
@@ -60,7 +61,7 @@ export function Form() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-md">Tarde</Text>
+          <Text variant="cataraman-title-sm">Tarde</Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.afternoon.map((hour) => (
               <ButtonSelect
@@ -75,7 +76,7 @@ export function Form() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-md">Noite</Text>
+          <Text variant="cataraman-title-sm">Noite</Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.night.map((hour) => (
               <ButtonSelect
@@ -90,7 +91,7 @@ export function Form() {
           </div>
         </div>
       </div>
-      <InputField leftIcon={UserSquare} label="Cliente">
+      <InputField leftIcon={UserSquare} label="Cliente" >
         <Input
           type="text"
           value={clientName}
@@ -99,7 +100,7 @@ export function Form() {
         />
       </InputField>
 
-        <Button><Text variant='cataraman-title-md' className="uppercase text-gray-800">Agendar</Text></Button>
+        <Button><Text variant='cataraman-title-sm' className="uppercase text-gray-800">Agendar</Text></Button>
     </form>
   );
 }

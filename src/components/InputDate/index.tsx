@@ -1,7 +1,7 @@
 import type { InputDateInterface } from "@/models/input-date";
 import React from "react";
 
-export const InputDate = React.forwardRef<
+export const Input = React.forwardRef<
   HTMLInputElement,
   InputDateInterface
 >(({ ...props }, ref) => {

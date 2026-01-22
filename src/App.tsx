@@ -2,9 +2,6 @@ import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 
 // @ts-expect-error: module declaration for SVG React import
-import TrashIcon from "@/assets/icons/trash.svg?react";
-
-// @ts-expect-error: module declaration for SVG React import
 
 import DateIcon from "@/assets/icons/calendar-blank.svg?react";
 // @ts-expect-error: module declaration for SVG React import
@@ -13,16 +10,15 @@ import ArrowDown from "@/assets/icons/arrow-down.svg?react";
 // @ts-expect-error: module declaration for SVG React import
 import UserSquare from "@/assets/icons/user-square.svg?react";
 
-import { Icon } from "@/components/ButtonIcon";
 import { ButtonSelect } from "@/components/ButtonSelect";
 import React from "react";
 import Title from "@/components/Title";
 import { Aside } from "@/components/Aside";
 import { Header } from "@/core-components/Header";
-import { LabelField } from "./components/LabelField";
-import { InputDate } from "./components/InputDate";
-import { TimeSelect } from "./components/TimeSelect";
-import { AVAILABLE_HOURS } from "./utils/appointment-hour";
+import { LabelField } from "@/components/LabelField";
+import { TimeSelect } from "@/components/TimeSelect";
+import { AVAILABLE_HOURS } from "@/utils/appointment-hour";
+import { Input } from "@/components/InputDate";
 
 function App() {
   const [selectedHour, setSelectedHour] = React.useState<string | null>(null);
@@ -51,7 +47,7 @@ function App() {
             leftIcon={DateIcon}
             rightIcon={ArrowDown}
           >
-            <InputDate
+            <Input
               ref={inputRef}
               type="date"
               min={today}
@@ -66,7 +62,6 @@ function App() {
             </Text>
 
             <div className="space-y-5">
-              {/* MANHÃ */}
               <div className="flex flex-col gap-2">
                 <Text>Manhã</Text>
 
@@ -84,7 +79,6 @@ function App() {
                 </div>
               </div>
 
-              {/* TARDE */}
               <div className="flex flex-col gap-2">
                 <Text>Tarde</Text>
 
@@ -102,7 +96,6 @@ function App() {
                 </div>
               </div>
 
-              {/* NOITE */}
               <div className="flex flex-col gap-2">
                 <Text>Noite</Text>
 
@@ -123,25 +116,37 @@ function App() {
           </TimeSelect>
 
           <LabelField label="Cliente" leftIcon={UserSquare}>
-            <InputDate
+            <Input
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
+              placeholder="Nome do cliente"
             />
           </LabelField>
+
+          <div>
+            <Button type="submit">
+              <Text className="text-gray-900 uppercase">Agendar</Text>
+            </Button>
+          </div>
         </form>
-        <div>
-          <Button>
-            <Text className="text-gray-900 uppercase">Agendar</Text>
-          </Button>
-        </div>
-        <div>
-          <Icon
-            svg={TrashIcon}
-            className="cursor-pointer text-yellow-base hover:text-yellow-dark"
-          />
-        </div>
       </Aside>
+
+      <LabelField
+        label="Data"
+        onClick={openPicker}
+        leftIcon={DateIcon}
+        rightIcon={ArrowDown}
+        className="w-45 flex items-center justify-center border border-gray-500 p-2 rounded-xl ga-2"
+      >
+        <Input
+          ref={inputRef}
+          type="date"
+          min={today}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </LabelField>
     </main>
   );
 }

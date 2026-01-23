@@ -12,11 +12,11 @@ import CloudIcon from "@/assets/icons/cloud-sun.svg?react";
 import MoonIcon from "@/assets/icons/moon-star.svg?react";
 import { useAppointments } from "@/hooks/useAppointment";
 import { AppointmentCard } from "../PeriodCard/Content/AppoitmentCard";
-import type { AppointmentListInterface } from "@/models/appointment";
+import type { AppointmentListProps } from "@/types";
 
 
 
-export function AppointmentList({ selectedDate }: AppointmentListInterface) {
+export function AppointmentList({ selectedDate }: AppointmentListProps) {
   const { morning, afternoon, night, remove } = useAppointments(selectedDate);
 
   return (

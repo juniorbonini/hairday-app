@@ -1,5 +1,4 @@
-import { InputField } from "../InputField";
-import { Input } from "../Input";
+import { Input, InputField } from "../InputField";
 import { AVAILABLE_HOURS } from "@/utils/appointment-hour";
 import { ButtonSelect } from "../ButtonSelect";
 
@@ -15,46 +14,28 @@ import { Text } from "../Text";
 import { Button } from "../Button";
 import { useAppointments } from "@/hooks/useAppointment";
 import type React from "react";
-
-export type FormProps = {
-  formDate: string;
-  setFormDate: (value: string) => void;
-  selectedHour: string;
-  clientName: string;
-  setClientName: (value: string) => void;
-  inputDateRef: React.RefObject<HTMLInputElement>;
-  today: string;
-  openDatePicker: () => void;
-  selectHour: (value: string) => void;
-};
+import type { FormDataInterface } from "@/models/form";
 
 export function Form({
-  formDate,
-  setFormDate,
-  selectedHour,
-  clientName,
-  setClientName,
-  inputDateRef,
-  today,
-  openDatePicker,
-  selectHour,
-}: FormProps) {
-  const { create, appointments } = useAppointments(formDate);
-  const reservedHours = appointments.map((a) => a.time);
+  data,
+  inputDateRef
+}: FormDataInterface) {
+  const { create, appointments } = useAppointments(data.formDate);
+  const reservedHours = appointments.map((a) => a.time );
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (!formDate || !selectedHour || !clientName) return;
+    if (!data.formDate || !data.selectedHour || !data.clientName) return;
 
     create({
-      date: formDate,
-      time: selectedHour,
-      clientName,
+      date: data.date,
+      time: data.selectedHour,
+      clientName: data.clientName
     });
 
-    setClientName("");
+    data.setClientName("");
     // limpar seleção de horário após criação
-    selectHour(selectedHour);
+    data.selectHour(data.selectedHour);
   }
 
   return (
@@ -63,14 +44,14 @@ export function Form({
         label="Data"
         leftIcon={DateIcon}
         rightIcon={ArrowIcon}
-        onClick={openDatePicker}
+        onClick={data.openDatePicker}
       >
           <Input
             ref={inputDateRef}
-            value={formDate}
-            min={today}
+            value={data.formDate}
+            min={data.today}
             onChange={(event) => {
-              setFormDate(event.target.value);
+              data.setFormDate(event.target.value);
             }}
           />
       </InputField>
@@ -85,9 +66,9 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={selectedHour === hour}
-                disabled={!formDate || reservedHours.includes(hour)}
-                onClick={() => selectHour(hour)}
+                selected={data.selectedHour === hour}
+                disabled={!data.formDate || reservedHours.includes(hour)}
+                onClick={() => data.selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -101,9 +82,9 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={selectedHour === hour}
-                disabled={!formDate || reservedHours.includes(hour)}
-                onClick={() => selectHour(hour)}
+                selected={data.selectedHour === hour}
+                disabled={!data.formDate || reservedHours.includes(hour)}
+                onClick={() => data.selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -117,9 +98,9 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={selectedHour === hour}
-                disabled={!formDate || reservedHours.includes(hour)}
-                onClick={() => selectHour(hour)}
+                selected={data.selectedHour === hour}
+                disabled={!data.formDate || reservedHours.includes(hour)}
+                onClick={() => data.selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -130,13 +111,13 @@ export function Form({
       <InputField leftIcon={UserSquare} label="Cliente" >
         <Input
           type="text"
-          value={clientName}
+          value={data.clientName}
           placeholder="Nome do cliente"
-          onChange={(event) => setClientName(event.target.value)}
+          onChange={(event) => data.setClientName(event.target.value)}
         />
       </InputField>
 
-        <Button disabled={!formDate || !selectedHour || !clientName || reservedHours.includes(selectedHour)}>
+        <Button disabled={!data.formDate || !data.selectedHour || !data.clientName || reservedHours.includes(data.selectedHour)}>
           <Text variant='cataraman-title-sm' className="uppercase text-gray-800">Agendar</Text>
         </Button>
     </form>

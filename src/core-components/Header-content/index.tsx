@@ -7,14 +7,7 @@ import DateIcon from "@/assets/icons/calendar-blank.svg?react";
 
 // @ts-expect-error: module declaration for SVG React import
 import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
-
-export type MainContentProps = {
-  filterDate: string;
-  setFilterDate: (value: string) => void;
-  inputDateRef: React.RefObject<HTMLInputElement>;
-  today: string;
-  openDatePicker: () => void;
-};
+import type { MainContentInterface } from "@/models/main-content";
 
 export function MainContent({
   filterDate,
@@ -22,7 +15,7 @@ export function MainContent({
   inputDateRef,
   today,
   setFilterDate,
-}: MainContentProps) {
+}: MainContentInterface) {
   return (
     <div className="w-full py-20">
       <div className="mx-auto w-240 flex flex-col gap-6">

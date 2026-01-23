@@ -1,8 +1,9 @@
 import { useLocalStorage } from "usehooks-ts";
-
-import { STORAGE_KEY, type Appointment } from "@/models/appointment";
 import React from "react";
-import { getAppointmentByHour } from "@/utils/get-appointment-by-hour";
+
+import { STORAGE_KEY } from "@/models/appointment";
+import type { Appointment, AppointmentCreation } from "@/types";
+import { groupAppointmentsByPeriod } from "@/utils/schedule";
 
 export function useAppointments(selectedDate: string) {
   const [appointments, setAppointments] = useLocalStorage<Appointment[]>(
@@ -10,47 +11,41 @@ export function useAppointments(selectedDate: string) {
     [],
   );
 
-  function create(data: Omit<Appointment, "id">) {
+  function create(data: AppointmentCreation) {
+    // Prevent double-booking same date + time
+    const exists = appointments.some(
+      (a) => a.date === data.date && a.time === data.time,
+    );
+
+    if (exists) return false;
+
     const newAppointment: Appointment = {
       id: Math.random().toString(36).substring(2, 9),
       ...data,
     };
 
     setAppointments((prev) => [...prev, newAppointment]);
+    return true;
   }
 
   function remove(id: string) {
-    setAppointments((prev) =>
-      prev.filter((appointment) => appointment.id !== id),
-    );
+    setAppointments((prev) => prev.filter((appointment) => appointment.id !== id));
   }
 
-  const AppointmentByDate = React.useMemo(() => {
+  const filtered = React.useMemo(() => {
     if (!selectedDate) return appointments;
-
-    return appointments.filter(
-      (appointment) => appointment.date === selectedDate,
-    );
+    return appointments.filter((a) => a.date === selectedDate);
   }, [appointments, selectedDate]);
 
-  const morning = AppointmentByDate.filter(
-    (a) => getAppointmentByHour(a.time) === "morning",
-  );
-
-  const afternoon = AppointmentByDate.filter(
-    (a) => getAppointmentByHour(a.time) === "afternoon",
-  );
-
-  const night = AppointmentByDate.filter(
-    (a) => getAppointmentByHour(a.time) === "night",
-  );
+  const grouped = React.useMemo(() => groupAppointmentsByPeriod(filtered), [filtered]);
 
   return {
-    appointments: AppointmentByDate,
+    appointments: filtered,
+    allAppointments: appointments,
     create,
     remove,
-    morning,
-    afternoon,
-    night,
-  };
+    morning: grouped.morning,
+    afternoon: grouped.afternoon,
+    night: grouped.night,
+  } as const;
 }

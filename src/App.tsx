@@ -4,7 +4,7 @@ import { Aside } from "@/components/Aside";
 import { Header } from "@/core-components/Header";
 import { Form } from "./components/Form";
 import { MainContent } from "./core-components/Header-content";
-import { useAppointmentForm } from "@/hooks/useAppointmentForm";
+import { useAppointmentForm } from "./hooks/useAppointmentForm";
 
 function App() {
   const appointmentForm = useAppointmentForm();

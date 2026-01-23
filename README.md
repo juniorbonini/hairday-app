@@ -1,73 +1,91 @@
-# React + TypeScript + Vite
+# 📅 Sistema de Agendamentos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação desenvolvida em **React + TypeScript** com o objetivo de praticar organização de código, componentização e regras de negócio.
 
-Currently, two official plugins are available:
+O projeto permite criar, visualizar e remover agendamentos, organizando-os automaticamente por períodos do dia.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Funcionalidades
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- Adição de agendamentos com nome, data e horário
+- Listagem dinâmica dos agendamentos
+- Remoção de agendamentos
+- Agrupamento automático por períodos:
+  - Manhã (09h às 12h)
+  - Tarde (13h às 18h)
+  - Noite (19h às 21h)
+- Exibição de estado vazio por período
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧠 Conceitos aplicados
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React com TypeScript
+- Tipagem forte
+- Estados e manipulação de arrays (`map`, `filter`, `reduce`)
+- Separação de responsabilidades
+- Regras de negócio fora do JSX
+- Hooks customizados
+- Organização de pastas pensando em escalabilidade
+- Estilização com Tailwind CSS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🧩 Estrutura do projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+src/
+assets/
+core-components/
+components/
+hooks/
+models/
+utils/
+types/
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Tecnologias
+
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+
+---
+
+## 🔧 Tasks atuais (em andamento)
+
+Atualmente o projeto segue em evolução com foco em refatoração e melhoria da experiência do usuário.
+
+### Refatoração geral
+- [X] Refatorar componentes para melhorar legibilidade
+- [X] Ajustar tipagens e modelos
+- [X] Revisar hooks e responsabilidades
+- [ ] Melhorar separação entre layout e regra de negócio
+- [ ] Padronizar estrutura dos componentes
+
+### Input Component (em desenvolvimento)
+- [ ] Atualizar comportamento visual do input
+- [ ] Implementar controle de estados visuais (focus, filled, default)
+- [ ] Ajustar alinhamento do ícone com o texto
+- [ ] Padronizar estilos com Tailwind CSS
+
+#### Comportamento esperado do Input
+- Ao receber **focus**, a borda deve mudar para **yellow**
+- Quando o input estiver **filled (com valor)**, a borda deve permanecer **yellow**
+- Caso não esteja focado nem preenchido, utilizar a borda padrão do input
+- O **ícone do input** deve:
+  - Alterar sua cor para `gray-600`
+  - Permanecer alinhado verticalmente com o texto
+  - Respeitar o espaçamento do `leftIcon`
+
+---
+
+## 📌 Objetivo
+
+Projeto desenvolvido como desafio prático para consolidar conhecimentos em React e melhorar a organização de aplicações frontend.
+
+---
+
+Desenvolvido por **Junior Bonini**.

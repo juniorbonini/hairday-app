@@ -7,8 +7,8 @@ export function useAppointmentForm() {
   const [selectedHour, setSelectedHour] = React.useState<string>("");
   
 
-  const sidebarInputRef = React.useRef<HTMLInputElement | null>(null);
   const mainInputRef = React.useRef<HTMLInputElement | null>(null);
+  const sidebarInputRef = React.useRef<HTMLInputElement | null>(null);
   const today = React.useMemo(() => {
     return new Date().toISOString().split("T")[0];
   }, []);

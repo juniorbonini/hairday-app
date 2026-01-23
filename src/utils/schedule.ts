@@ -1,4 +1,4 @@
-import { Period, Appointment } from "@/types";
+import type { Period, Appointment } from "@/types";
 
 export function getPeriodByHour(hour: string): Period {
   const selectedHour = Number(hour.split(":")[0]);

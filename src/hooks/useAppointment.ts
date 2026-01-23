@@ -12,7 +12,6 @@ export function useAppointments(selectedDate: string) {
   );
 
   function create(data: AppointmentCreation) {
-    // Prevent double-booking same date + time
     const exists = appointments.some(
       (a) => a.date === data.date && a.time === data.time,
     );

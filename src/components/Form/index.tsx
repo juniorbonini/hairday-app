@@ -1,6 +1,4 @@
-import { Input, InputField } from "../InputField";
-import { AVAILABLE_HOURS } from "@/utils/appointment-hour";
-import { ButtonSelect } from "../ButtonSelect";
+import  React from "react";
 
 // @ts-expect-error: module declaration for SVG React import
 import DateIcon from "@/assets/icons/calendar-blank.svg?react";
@@ -10,32 +8,50 @@ import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
 
 // @ts-expect-error: module declaration for SVG React import
 import UserSquare from "@/assets/icons/user-square.svg?react";
+
 import { Text } from "../Text";
 import { Button } from "../Button";
+import { ButtonSelect } from "../ButtonSelect";
+import { Input, InputField } from "../InputField";
+import type { FormInterface } from "@/models/form";
 import { useAppointments } from "@/hooks/useAppointment";
-import type React from "react";
-import type { FormDataInterface } from "@/models/form";
+import { AVAILABLE_HOURS } from "@/utils/appointment-hour";
 
 export function Form({
-  data,
-  inputDateRef
-}: FormDataInterface) {
-  const { create, appointments } = useAppointments(data.formDate);
-  const reservedHours = appointments.map((a) => a.time );
+  setClientName,
+  formDate,
+  selectHour,
+  selectedHour,
+  clientName,
+  today,
+  openDatePicker,
+  setFormDate,
+  inputDateRef,
+}: FormInterface) {
+  const { create, appointments } = useAppointments(formDate);
+  const reservedHours = appointments.map((a) => a.time);
+  const [feedback, setFeedback] = React.useState<null | { type: "error" | "success"; text: string }>(null);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (!data.formDate || !data.selectedHour || !data.clientName) return;
+    if (!formDate || !selectedHour || !clientName) return;
 
-    create({
-      date: data.date,
-      time: data.selectedHour,
-      clientName: data.clientName
+    const ok = create({
+      date: formDate,
+      time: selectedHour,
+      clientName,
     });
 
-    data.setClientName("");
-    // limpar seleção de horário após criação
-    data.selectHour(data.selectedHour);
+    if (!ok) {
+      setFeedback({ type: "error", text: "Horário já reservado para esta data." });
+      return;
+    }
+
+    setFeedback({ type: "success", text: "Agendamento criado com sucesso." });
+    setClientName("");
+    selectHour(selectedHour);
+
+    window.setTimeout(() => setFeedback(null), 3000);
   }
 
   return (
@@ -44,16 +60,16 @@ export function Form({
         label="Data"
         leftIcon={DateIcon}
         rightIcon={ArrowIcon}
-        onClick={data.openDatePicker}
+        onClick={openDatePicker}
       >
-          <Input
-            ref={inputDateRef}
-            value={data.formDate}
-            min={data.today}
-            onChange={(event) => {
-              data.setFormDate(event.target.value);
-            }}
-          />
+        <Input
+          ref={inputDateRef}
+          value={formDate}
+          min={today}
+          onChange={(event) => {
+            setFormDate(event.target.value);
+          }}
+        />
       </InputField>
       <div className="space-y-6">
         <Text variant="cataraman-title-md">Horários</Text>
@@ -66,9 +82,10 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={data.selectedHour === hour}
-                disabled={!data.formDate || reservedHours.includes(hour)}
-                onClick={() => data.selectHour(hour)}
+                selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
+                title={reservedHours.includes(hour) ? "Horário já reservado" : undefined}
+                onClick={() => selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -82,9 +99,10 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={data.selectedHour === hour}
-                disabled={!data.formDate || reservedHours.includes(hour)}
-                onClick={() => data.selectHour(hour)}
+                selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
+                title={reservedHours.includes(hour) ? "Horário já reservado" : undefined}
+                onClick={() => selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -98,9 +116,10 @@ export function Form({
               <ButtonSelect
                 key={hour}
                 type="button"
-                selected={data.selectedHour === hour}
-                disabled={!data.formDate || reservedHours.includes(hour)}
-                onClick={() => data.selectHour(hour)}
+                selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
+                title={reservedHours.includes(hour) ? "Horário já reservado" : undefined}
+                onClick={() => selectHour(hour)}
               >
                 {hour}
               </ButtonSelect>
@@ -108,18 +127,32 @@ export function Form({
           </div>
         </div>
       </div>
-      <InputField leftIcon={UserSquare} label="Cliente" >
+      <InputField leftIcon={UserSquare} label="Cliente">
         <Input
           type="text"
-          value={data.clientName}
+          value={clientName}
           placeholder="Nome do cliente"
-          onChange={(event) => data.setClientName(event.target.value)}
+          onChange={(event) => setClientName(event.target.value)}
         />
       </InputField>
 
-        <Button disabled={!data.formDate || !data.selectedHour || !data.clientName || reservedHours.includes(data.selectedHour)}>
-          <Text variant='cataraman-title-sm' className="uppercase text-gray-800">Agendar</Text>
-        </Button>
+      <Button
+        disabled={
+          !formDate ||
+          !selectedHour ||
+          !clientName ||
+          reservedHours.includes(selectedHour)
+        }
+      >
+        <Text variant="cataraman-title-sm" className="uppercase text-gray-800">
+          Agendar
+        </Text>
+      </Button>
+      {feedback ? (
+        <div className={`mt-2 ${feedback.type === "error" ? "text-red-400" : "text-green-400"}`} role="alert">
+          <Text>{feedback.text}</Text>
+        </div>
+      ) : null}
     </form>
   );
 }

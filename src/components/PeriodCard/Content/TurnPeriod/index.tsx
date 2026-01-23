@@ -1,5 +1,6 @@
 import { Text } from "@/components/Text";
 import type { TurnPeriodInterface } from "@/models/turn-period";
+import React from "react";
 
 export function TurnPeriod({
   title,
@@ -7,7 +8,7 @@ export function TurnPeriod({
   children,
   icon,
 }: TurnPeriodInterface) {
-  const hasAppointments = Boolean(children);
+  const hasAppointments = React.Children.count(children) > 0;
   return (
     <div className="rounded-xl border border-gray-600 overflow-hidden">
       <div className="flex items-center justify-between px-6 py-2 border-b border-gray-600">

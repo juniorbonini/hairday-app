@@ -1,32 +1,44 @@
 import React from "react";
 
 export function useAppointmentForm() {
-  const [date, setDate] = React.useState("");
+  const [formDate, setFormDate] = React.useState("");
+  const [filterDate, setFilterDate] = React.useState("");
   const [clientName, setClientName] = React.useState("");
- const [selectedHour, setSelectedHour] = React.useState<string | null>(null);
+ const [selectedHour, setSelectedHour] = React.useState<string>("");
 
-  const inputDateRef = React.useRef<HTMLInputElement>(null);
+  const sidebarInputRef = React.useRef<HTMLInputElement>(null);
+  const mainInputRef = React.useRef<HTMLInputElement>(null);
   const today = React.useMemo(() => {
     return new Date().toISOString().split("T")[0];
   }, []);
 
-  function openDatePicker() {
-    inputDateRef.current?.showPicker();
+  function openDatePicker(target: "sidebar" | "main" = "sidebar") {
+    if (target === "sidebar") {
+      sidebarInputRef.current?.showPicker();
+    } else {
+      mainInputRef.current?.showPicker();
+    }
   }
 
   function selectHour(value: string) {
-    setSelectedHour((prev) => (prev === value ? null : selectedHour));
+    setSelectedHour((prev) => (prev === value ? "" : value));
   }
 
   return {
-    date,
-    setDate,
+    // criação
+    formDate,
+    setFormDate,
+    // filtro
+    filterDate,
+    setFilterDate,
+
     clientName,
     setClientName,
     selectedHour,
     setSelectedHour,
     today,
-    inputDateRef,
+    sidebarInputRef,
+    mainInputRef,
     openDatePicker,
     selectHour,
   };

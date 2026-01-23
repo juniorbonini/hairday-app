@@ -1,4 +1,3 @@
-import { useAppointmentForm } from "@/hooks/useAppointmentForm";
 import { InputField } from "../InputField";
 import { Input } from "../Input";
 import { AVAILABLE_HOURS } from "@/utils/appointment-hour";
@@ -14,45 +13,80 @@ import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
 import UserSquare from "@/assets/icons/user-square.svg?react";
 import { Text } from "../Text";
 import { Button } from "../Button";
+import { useAppointments } from "@/hooks/useAppointment";
+import type React from "react";
 
-export function Form() {
-  const {
-    date,
-    setDate,
-    selectedHour,
-    clientName,
-    setClientName,
-    inputDateRef,
-    today,
-    openDatePicker,
-    selectHour,
-  } = useAppointmentForm();
+export type FormProps = {
+  formDate: string;
+  setFormDate: (value: string) => void;
+  selectedHour: string;
+  clientName: string;
+  setClientName: (value: string) => void;
+  inputDateRef: React.RefObject<HTMLInputElement>;
+  today: string;
+  openDatePicker: () => void;
+  selectHour: (value: string) => void;
+};
+
+export function Form({
+  formDate,
+  setFormDate,
+  selectedHour,
+  clientName,
+  setClientName,
+  inputDateRef,
+  today,
+  openDatePicker,
+  selectHour,
+}: FormProps) {
+  const { create, appointments } = useAppointments(formDate);
+  const reservedHours = appointments.map((a) => a.time);
+
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    if (!formDate || !selectedHour || !clientName) return;
+
+    create({
+      date: formDate,
+      time: selectedHour,
+      clientName,
+    });
+
+    setClientName("");
+    // limpar seleção de horário após criação
+    selectHour(selectedHour);
+  }
 
   return (
-    <form className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <InputField
         label="Data"
         leftIcon={DateIcon}
         rightIcon={ArrowIcon}
         onClick={openDatePicker}
       >
-        <Input
-          ref={inputDateRef}
-          value={date}
-          min={today}
-          onChange={(event) => setDate(event.target.value)}
-        />
+          <Input
+            ref={inputDateRef}
+            value={formDate}
+            min={today}
+            onChange={(event) => {
+              setFormDate(event.target.value);
+            }}
+          />
       </InputField>
       <div className="space-y-6">
-        <Text variant='cataraman-title-md'>Horários</Text>
+        <Text variant="cataraman-title-md">Horários</Text>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-sm" className=" mb-6">Manhã</Text>
+          <Text variant="cataraman-title-sm" className=" mb-6">
+            Manhã
+          </Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.morning.map((hour) => (
               <ButtonSelect
                 key={hour}
                 type="button"
                 selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
                 onClick={() => selectHour(hour)}
               >
                 {hour}
@@ -68,6 +102,7 @@ export function Form() {
                 key={hour}
                 type="button"
                 selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
                 onClick={() => selectHour(hour)}
               >
                 {hour}
@@ -83,6 +118,7 @@ export function Form() {
                 key={hour}
                 type="button"
                 selected={selectedHour === hour}
+                disabled={!formDate || reservedHours.includes(hour)}
                 onClick={() => selectHour(hour)}
               >
                 {hour}
@@ -100,7 +136,9 @@ export function Form() {
         />
       </InputField>
 
-        <Button><Text variant='cataraman-title-sm' className="uppercase text-gray-800">Agendar</Text></Button>
+        <Button disabled={!formDate || !selectedHour || !clientName || reservedHours.includes(selectedHour)}>
+          <Text variant='cataraman-title-sm' className="uppercase text-gray-800">Agendar</Text>
+        </Button>
     </form>
   );
 }

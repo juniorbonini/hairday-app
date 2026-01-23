@@ -1,6 +1,6 @@
 import { Input, InputField } from "@/components/InputField";
 import { Text } from "@/components/Text";
-import { useAppointmentForm } from "@/hooks/useAppointmentForm";
+import { AppointmentList } from "@/components/List";
 
 // @ts-expect-error: module declaration for SVG React import
 import DateIcon from "@/assets/icons/calendar-blank.svg?react";
@@ -8,9 +8,21 @@ import DateIcon from "@/assets/icons/calendar-blank.svg?react";
 // @ts-expect-error: module declaration for SVG React import
 import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
 
-export function MainContent() {
-  const { date, openDatePicker, inputDateRef, today, setDate } =
-    useAppointmentForm();
+export type MainContentProps = {
+  filterDate: string;
+  setFilterDate: (value: string) => void;
+  inputDateRef: React.RefObject<HTMLInputElement>;
+  today: string;
+  openDatePicker: () => void;
+};
+
+export function MainContent({
+  filterDate,
+  openDatePicker,
+  inputDateRef,
+  today,
+  setFilterDate,
+}: MainContentProps) {
   return (
     <div className="w-full py-20">
       <div className="mx-auto w-240 flex flex-col gap-6">
@@ -31,12 +43,14 @@ export function MainContent() {
           >
             <Input
               ref={inputDateRef}
-              value={date}
+              value={filterDate}
               min={today}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(e) => setFilterDate(e.target.value)}
             />
           </InputField>
         </header>
+
+        <AppointmentList selectedDate={filterDate} />
       </div>
     </div>
   );

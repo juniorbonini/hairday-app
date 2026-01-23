@@ -10,7 +10,7 @@ export const buttonSelectVariants = cva(
       },
       selected: {
         true: 'text-yellow-base border border-yellow-base',
-        false: 'border-transparent text-gray-300'
+        false: 'border-transparent text-gray-200'
       },
       size: {
         sm: "h-10 w-19.5",

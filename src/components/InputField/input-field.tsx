@@ -14,7 +14,7 @@ export function InputField({
 }: LabelFieldInterface) {
   return (
     <label className="flex flex-col gap-3">
-      {label && <Text variant="cataraman-title-md">{label}</Text>}
+      {label && <Text variant="cataraman-title-md" className="text-gray-200">{label}</Text>}
       <div
         className={inputFieldVariants({ size, className })}
         onClick={onClick}
@@ -25,7 +25,7 @@ export function InputField({
         {children}
         {rightIcon && (
           <div className="ml-auto">
-            <Icon svg={rightIcon} className="w-5 h-5" />
+            <Icon svg={rightIcon} variant='secundary' className="w-5 h-5 mt-1.5"  />
           </div>
         )}
       </div>

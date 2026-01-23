@@ -72,9 +72,9 @@ export function Form({
         />
       </InputField>
       <div className="space-y-6">
-        <Text variant="cataraman-title-md">Horários</Text>
+        <Text variant="cataraman-title-md" className="flex mb-5">Horários</Text>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-sm" className=" mb-6">
+          <Text variant="cataraman-title-sm" className="text-gray-400">
             Manhã
           </Text>
           <div className="flex flex-wrap items-center gap-2">
@@ -93,7 +93,7 @@ export function Form({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-sm">Tarde</Text>
+          <Text variant="cataraman-title-sm" className="text-gray-400">Tarde</Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.afternoon.map((hour) => (
               <ButtonSelect
@@ -110,7 +110,7 @@ export function Form({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Text variant="cataraman-title-sm">Noite</Text>
+          <Text variant="cataraman-title-sm" className="text-gray-400">Noite</Text>
           <div className="flex flex-wrap items-center gap-2">
             {AVAILABLE_HOURS.night.map((hour) => (
               <ButtonSelect
@@ -144,7 +144,7 @@ export function Form({
           reservedHours.includes(selectedHour)
         }
       >
-        <Text variant="cataraman-title-sm" className="uppercase text-gray-800">
+        <Text variant="cataraman-button-text">
           Agendar
         </Text>
       </Button>

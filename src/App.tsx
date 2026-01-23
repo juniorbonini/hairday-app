@@ -16,11 +16,11 @@ function App() {
 
         <Aside>
           <Container>
-            <Text variant="cataraman-title-lg" className="text-white">
+            <Text variant="cataraman-title-lg">
               Agende um atendimento
             </Text>
 
-            <Text>
+            <Text variant="cataraman-sm">
               Selecione data, horário e informe o nome do cliente para criar o
               agendamento
             </Text>

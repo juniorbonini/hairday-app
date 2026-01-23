@@ -13,9 +13,9 @@ export function TurnPeriod({
     <div className="rounded-xl border border-gray-600 overflow-hidden">
       <div className="flex items-center justify-between px-6 py-2 border-b border-gray-600">
         <div className="flex items-center justify-center gap-3">
-          <span className="mt-1">{icon}</span>
+          <span className="mt-1.5">{icon}</span>
 
-          <Text variant="cataraman-md">{title}</Text>
+          <Text variant="cataraman-sm">{title}</Text>
         </div>
 
         <Text>{range}</Text>
@@ -25,7 +25,7 @@ export function TurnPeriod({
         {hasAppointments ? (
           <div>{children}</div>
         ) : (
-          <Text>Nenhum agendamento para este período</Text>
+          <Text className="text-gray-500">Nenhum agendamento para este período</Text>
         )}
       </div>
     </div>

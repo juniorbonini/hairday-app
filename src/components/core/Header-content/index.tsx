@@ -18,7 +18,7 @@ export function MainContent({
 }: MainContentInterface) {
   return (
     <div className="w-full py-20">
-      <div className="mx-auto w-240 flex flex-col gap-6">
+      <div className="mx-auto w-full md:w-240 flex flex-col gap-6">
         <header className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <Text variant="cataraman-title-lg" className="text-white">

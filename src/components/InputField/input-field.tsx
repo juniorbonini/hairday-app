@@ -1,5 +1,5 @@
-import { Icon } from "../ButtonIcon";
-import { Text } from "../Text";
+import { Icon } from "@/components/core/ButtonIcon";
+import { Text } from "@/components/core/Text";
 import { inputFieldVariants, type LabelFieldInterface } from "@/models/date-field";
 
 export function InputField({

@@ -1,16 +1,16 @@
-import { Text } from "@/components/Text";
+import { Text } from "@/components/core/Text";
 import { Form } from "./components/Form";
 import { Aside } from "@/components/Aside";
-import Container from "@/components/Container";
-import { Header } from "@/core-components/Header";
-import { MainContent } from "./core-components/Header-content";
+import Container from "@/components/core/Container";
 import { useAppointmentForm } from "./hooks/useAppointmentForm";
+import { Header } from "./components/core/Header";
+import { MainContent } from "./components/core/Header-content";
 
 function App() {
   const appointmentForm = useAppointmentForm();
 
   return (
-    <div className="min-h-screen bg-gray-800">
+    <div className="min-h-screen bg-gray-800 p-3 md:mx-auto">
       <div className="flex flex-col md:flex-row min-h-screen">
         <Header />
 
@@ -40,7 +40,7 @@ function App() {
         </Aside>
 
         <main className="flex-1">
-          <div className="mx-auto w-240 flex flex-col">
+          <div className="mx-auto w-full md:w-240 flex flex-col">
             <MainContent
               filterDate={appointmentForm.filterDate}
               setFilterDate={appointmentForm.setFilterDate}

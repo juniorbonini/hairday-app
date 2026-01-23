@@ -1,4 +1,4 @@
-import { Text } from "@/components/Text";
+import { Text } from "@/components/core/Text";
 import type { TurnPeriodInterface } from "@/models/turn-period";
 import React from "react";
 

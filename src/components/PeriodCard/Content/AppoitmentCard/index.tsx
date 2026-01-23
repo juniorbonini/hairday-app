@@ -1,5 +1,5 @@
 import { Icon } from "@/components/ButtonIcon";
-import { Text } from "@/components/Text";
+import { Text } from "@/components/core/Text";
 import type { AppointmentCardProps } from "@/types";
 
 // @ts-expect-error: module declaration for SVG React import

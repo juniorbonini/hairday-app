@@ -6,8 +6,12 @@ export const inputFieldVariants = cva(
   {
     variants: {
       size: {
-        md: "w-85",
-        sm: "w-55",
+        md: "w-full md:w-85",
+        sm: "w-full md:w-55",
+      },
+      focused: {
+        true: "border-yellow-base",
+        false: "",
       },
     },
     defaultVariants: {

@@ -13,7 +13,7 @@ export const buttonSelectVariants = cva(
         false: 'border-transparent text-gray-200'
       },
       size: {
-        sm: "h-10 w-19.5",
+        sm: "h-10 w-20 md:w-19.5",
       },
       disabled: {
         true: "opacity-30 pointer-events-none",

@@ -9,8 +9,8 @@ import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
 // @ts-expect-error: module declaration for SVG React import
 import UserSquare from "@/assets/icons/user-square.svg?react";
 
-import { Text } from "../Text";
-import { Button } from "../Button";
+import { Text } from "@/components/core/Text";
+import { Button } from "@/components/core/Button";
 import { ButtonSelect } from "../ButtonSelect";
 import { Input, InputField } from "../InputField";
 import type { FormInterface } from "@/models/form";

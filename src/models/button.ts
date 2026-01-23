@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import type React from "react";
 
 export const buttonVariants = cva(
-  "items-center justify-center w-85 rounded-lg cursor-pointer transition",
+  "items-center justify-center w-full md:w-85 rounded-lg cursor-pointer transition",
   {
     variants: {
       variant: {

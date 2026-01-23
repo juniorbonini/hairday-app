@@ -1,6 +1,5 @@
 import { TurnPeriod } from "@/components/PeriodCard/Content/TurnPeriod";
 
-import { Icon } from "@/components/ButtonIcon";
 
 // @ts-expect-error: module declaration for SVG React import
 import SunHorizon from "@/assets/icons/sun-horizon.svg?react";
@@ -13,6 +12,7 @@ import MoonIcon from "@/assets/icons/moon-star.svg?react";
 import { useAppointments } from "@/hooks/useAppointment";
 import { AppointmentCard } from "../PeriodCard/Content/AppoitmentCard";
 import type { AppointmentListProps } from "@/types";
+import { Icon } from "../core/ButtonIcon";
 
 
 

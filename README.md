@@ -62,23 +62,8 @@ Atualmente o projeto segue em evolução com foco em refatoração e melhoria da
 - [X] Refatorar componentes para melhorar legibilidade
 - [X] Ajustar tipagens e modelos
 - [X] Revisar hooks e responsabilidades
-- [ ] Melhorar separação entre layout e regra de negócio
-- [ ] Padronizar estrutura dos componentes
-
-### Input Component (em desenvolvimento)
-- [ ] Atualizar comportamento visual do input
-- [ ] Implementar controle de estados visuais (focus, filled, default)
-- [ ] Ajustar alinhamento do ícone com o texto
-- [ ] Padronizar estilos com Tailwind CSS
-
-#### Comportamento esperado do Input
-- Ao receber **focus**, a borda deve mudar para **yellow**
-- Quando o input estiver **filled (com valor)**, a borda deve permanecer **yellow**
-- Caso não esteja focado nem preenchido, utilizar a borda padrão do input
-- O **ícone do input** deve:
-  - Alterar sua cor para `gray-600`
-  - Permanecer alinhado verticalmente com o texto
-  - Respeitar o espaçamento do `leftIcon`
+- [X] Melhorar separação entre layout e regra de negócio
+- [X] Padronizar estrutura dos componentes
 
 ---
 

@@ -1,5 +1,4 @@
 import { Input, InputField } from "@/components/InputField";
-import { Text } from "@/components/Text";
 import { AppointmentList } from "@/components/List";
 
 // @ts-expect-error: module declaration for SVG React import
@@ -8,6 +7,7 @@ import DateIcon from "@/assets/icons/calendar-blank.svg?react";
 // @ts-expect-error: module declaration for SVG React import
 import ArrowIcon from "@/assets/icons/arrow-down.svg?react";
 import type { MainContentInterface } from "@/models/main-content";
+import { Text } from "../Text";
 
 export function MainContent({
   filterDate,

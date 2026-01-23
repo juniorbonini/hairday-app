@@ -1,9 +1,9 @@
-import { Icon } from "@/components/ButtonIcon";
 import { Text } from "@/components/core/Text";
 import type { AppointmentCardProps } from "@/types";
 
 // @ts-expect-error: module declaration for SVG React import
 import TrashIcon from "@/assets/icons/trash.svg?react"
+import { Icon } from "@/components/core/ButtonIcon";
 
 export function AppointmentCard({
   time,
